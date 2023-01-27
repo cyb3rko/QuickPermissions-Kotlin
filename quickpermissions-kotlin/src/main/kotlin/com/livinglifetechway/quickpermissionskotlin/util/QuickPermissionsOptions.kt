@@ -1,4 +1,4 @@
-package com.livinglifetechway.quickpermissions_kotlin.util
+package com.livinglifetechway.quickpermissionskotlin.util
 
 data class QuickPermissionsOptions(
     var handleRationale: Boolean = true,

@@ -1,4 +1,4 @@
-package com.livinglifetechway.quickpermissions_kotlin.util
+package com.livinglifetechway.quickpermissionskotlin.util
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -221,19 +221,16 @@ class PermissionCheckerFragment : Fragment() {
         negativeText: String,
         onPositive: () -> Unit
     ) {
-        val context = activity?.applicationContext
-        if (context != null) {
-            AlertDialog.Builder(context)
-                .setMessage(message)
-                .setPositiveButton(positiveText) { _, _ ->
-                    onPositive()
-                }
-                .setNegativeButton(negativeText) { _, _ ->
-                    clean()
-                }
-                .setCancelable(false)
-                .show()
-        }
+        AlertDialog.Builder(requireActivity())
+            .setMessage(message)
+            .setPositiveButton(positiveText) { _, _ ->
+                onPositive()
+            }
+            .setNegativeButton(negativeText) { _, _ ->
+                clean()
+            }
+            .setCancelable(false)
+            .show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

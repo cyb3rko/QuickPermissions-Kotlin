@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace 'com.livinglifetechway.quickpermissions_sample'
+    namespace 'com.livinglifetechway.quickpermissionssample'
     compileSdk 33
     defaultConfig {
-        applicationId "com.livinglifetechway.quickpermissions_sample"
+        applicationId "com.livinglifetechway.quickpermissionssample"
         minSdkVersion 16
         targetSdk 33
         versionCode 1

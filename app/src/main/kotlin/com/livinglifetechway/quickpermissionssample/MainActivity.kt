@@ -1,10 +1,10 @@
-package com.livinglifetechway.quickpermissions_sample
+package com.livinglifetechway.quickpermissionssample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.livinglifetechway.quickpermissions_sample.databinding.ActivityMainBinding
-import com.livinglifetechway.quickpermissions_sample.kotlin.AllKotlinActivity
+import com.livinglifetechway.quickpermissionssample.databinding.ActivityMainBinding
 import org.jetbrains.anko.startActivity
+import com.livinglifetechway.quickpermissionssample.AllKotlinActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding

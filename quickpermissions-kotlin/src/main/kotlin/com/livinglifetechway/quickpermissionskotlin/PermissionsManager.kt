@@ -1,14 +1,14 @@
-package com.livinglifetechway.quickpermissions_kotlin
+package com.livinglifetechway.quickpermissionskotlin
 
 import android.content.Context
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.livinglifetechway.quickpermissions_kotlin.util.PermissionCheckerFragment
-import com.livinglifetechway.quickpermissions_kotlin.util.PermissionsUtil
-import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
-import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsRequest
+import com.livinglifetechway.quickpermissionskotlin.util.PermissionCheckerFragment
+import com.livinglifetechway.quickpermissionskotlin.util.PermissionsUtil
+import com.livinglifetechway.quickpermissionskotlin.util.QuickPermissionsOptions
+import com.livinglifetechway.quickpermissionskotlin.util.QuickPermissionsRequest
 
 private const val TAG = "runWithPermissions"
 

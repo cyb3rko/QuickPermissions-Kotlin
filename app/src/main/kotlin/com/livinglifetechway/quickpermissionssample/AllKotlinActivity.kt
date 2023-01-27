@@ -1,4 +1,4 @@
-package com.livinglifetechway.quickpermissions_sample.kotlin
+package com.livinglifetechway.quickpermissionssample
 
 import android.Manifest
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.livinglifetechway.k4kotlin.onClick
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
-import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsRequest
-import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
-import com.livinglifetechway.quickpermissions_sample.databinding.ActivityAllKotlinBinding
+import com.livinglifetechway.quickpermissionskotlin.runWithPermissions
+import com.livinglifetechway.quickpermissionskotlin.util.QuickPermissionsRequest
+import com.livinglifetechway.quickpermissionskotlin.util.QuickPermissionsOptions
+import com.livinglifetechway.quickpermissionssample.databinding.ActivityAllKotlinBinding
 
 class AllKotlinActivity : AppCompatActivity() {
 
