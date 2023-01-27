@@ -7,9 +7,9 @@ import android.net.Uri.fromParts
 import android.os.Bundle
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import org.jetbrains.anko.alert
 
 /**
  * This fragment holds the single permission request and holds it until the flow is completed
@@ -148,15 +148,13 @@ class PermissionCheckerFragment : Fragment() {
                     return
                 }
 
-                activity?.alert {
-                    message = quickPermissionsRequest?.permanentlyDeniedMessage.orEmpty()
-                    positiveButton("SETTINGS") {
-                        openAppSettings()
-                    }
-                    negativeButton("CANCEL") {
-                        clean()
-                    }
-                }?.apply { isCancelable = false }?.show()
+                showDialog(
+                    message = quickPermissionsRequest?.permanentlyDeniedMessage.orEmpty(),
+                    positiveText = "SETTINGS",
+                    negativeText = "CANCEL"
+                ) {
+                    openAppSettings()
+                }
                 return
             }
 
@@ -168,15 +166,13 @@ class PermissionCheckerFragment : Fragment() {
                     return
                 }
 
-                activity?.alert {
-                    message = quickPermissionsRequest?.rationaleMessage.orEmpty()
-                    positiveButton("TRY AGAIN") {
-                        requestPermissionsFromUser()
-                    }
-                    negativeButton("CANCEL") {
-                        clean()
-                    }
-                }?.apply { isCancelable = false }?.show()
+                showDialog(
+                    message = quickPermissionsRequest?.rationaleMessage.orEmpty(),
+                    positiveText = "TRY AGAIN",
+                    negativeText = "CANCEL"
+                ) {
+                    requestPermissionsFromUser()
+                }
                 return
             }
 
@@ -194,6 +190,27 @@ class PermissionCheckerFragment : Fragment() {
             startActivityForResult(intent, PERMISSIONS_REQUEST_CODE)
         } else {
             Log.w(TAG, "openAppSettings: QuickPermissionsRequest has already completed its flow. Cannot open app settings")
+        }
+    }
+
+    private fun showDialog(
+        message: String,
+        positiveText: String,
+        negativeText: String,
+        onPositive: () -> Unit
+    ) {
+        val context = activity?.applicationContext
+        if (context != null) {
+            AlertDialog.Builder(context)
+                .setMessage(message)
+                .setPositiveButton(positiveText) { _, _ ->
+                    onPositive()
+                }
+                .setNegativeButton(negativeText) { _, _ ->
+                    clean()
+                }
+                .setCancelable(false)
+                .show()
         }
     }
 
