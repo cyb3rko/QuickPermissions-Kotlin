@@ -8,10 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.livinglifetechway.k4kotlin.onClick
-import com.livinglifetechway.k4kotlin.setBindingView
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsRequest
-import com.livinglifetechway.quickpermissions_sample.R
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
 import com.livinglifetechway.quickpermissions_sample.databinding.ActivityAllKotlinBinding
 
@@ -34,11 +32,11 @@ class AllKotlinActivity : AppCompatActivity() {
             permissionsDeniedMethod = { whenPermAreDenied(it) }
     )
 
-    lateinit var mBinding: ActivityAllKotlinBinding
+    private lateinit var mBinding: ActivityAllKotlinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = setBindingView(R.layout.activity_all_kotlin)
+        mBinding = ActivityAllKotlinBinding.inflate(layoutInflater)
 
         mBinding.button.onClick {
             // create the quickpermissions object
@@ -62,6 +60,8 @@ class AllKotlinActivity : AppCompatActivity() {
             }
             methodRequiresPermissions(options)
         }
+
+        setContentView(mBinding.root)
     }
 
     private fun methodRequiresPermissions(quickPermissionsOptions: QuickPermissionsOptions) = runWithPermissions(Manifest.permission.WRITE_CALENDAR, Manifest.permission.RECORD_AUDIO, options = quickPermissionsOptions) {
