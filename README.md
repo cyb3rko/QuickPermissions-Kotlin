@@ -1,6 +1,6 @@
-# QuickPermissions-Kotlin [![Release](https://jitpack.io/v/QuickPermissions/QuickPermissions-Kotlin.svg)](https://jitpack.io/#QuickPermissions/QuickPermissions-Kotlin)
+# QuickPermissions-Kotlin [![Release](https://jitpack.io/v/cyb3rko/QuickPermissions-Kotlin.svg)](https://jitpack.io/#cyb3rko/QuickPermissions-Kotlin)
 
-The most easiest way to handle Android Runtime Permissions in Kotlin.
+The easiest way to handle Android Runtime Permissions in Kotlin.
 
 ![Example](/media/example.png)
 
@@ -10,8 +10,6 @@ The most easiest way to handle Android Runtime Permissions in Kotlin.
   * [Let the library do all the hard stuff](#let-the-library-do-all-the-hard-stuff)
   * [Advanced](#advanced)
 * [Summary](#summary)
-* [Sample](https://github.com/QuickPermissions/QuickPermissions-Sample)
-
 
 ## Inspiration
 
@@ -47,9 +45,9 @@ As this library is using jitpack to publish this, you need to add jitpack url. I
 
 In your **app**'s `build.gradle` file, add the following dependency: 
 
-```
+```groovy
 dependencies {
-   implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
+   implementation 'com.github.cyb3rko:quickpermissions-kotlin:VERSION'
 }
 ```
 
