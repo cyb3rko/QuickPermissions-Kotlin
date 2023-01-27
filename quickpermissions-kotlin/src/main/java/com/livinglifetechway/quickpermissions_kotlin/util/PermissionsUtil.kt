@@ -11,16 +11,21 @@ import androidx.fragment.app.Fragment
  * methods.
  */
 object PermissionsUtil {
+    fun getDeniedPermissions(
+        permissions: Array<String>,
+        grantResults: IntArray
+    ): Array<String> = permissions.filterIndexed { index, _ ->
+        grantResults[index] == PackageManager.PERMISSION_DENIED
+    }.toTypedArray()
 
-    fun getDeniedPermissions(permissions: Array<String>, grantResults: IntArray): Array<String> =
-            permissions.filterIndexed { index, s ->
-                grantResults[index] == PackageManager.PERMISSION_DENIED
-            }.toTypedArray()
-
-    fun getPermanentlyDeniedPermissions(fragment: Fragment, permissions: Array<String>, grantResults: IntArray): Array<String> =
-            permissions.filterIndexed { index, s ->
-                grantResults[index] == PackageManager.PERMISSION_DENIED && !fragment.shouldShowRequestPermissionRationale(s)
-            }.toTypedArray()
+    fun getPermanentlyDeniedPermissions(
+        fragment: Fragment,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ): Array<String> = permissions.filterIndexed { index, s ->
+        grantResults[index] == PackageManager.PERMISSION_DENIED &&
+            !fragment.shouldShowRequestPermissionRationale(s)
+    }.toTypedArray()
 
     /**
      * Returns true if the Activity has access to all given permissions.
@@ -32,13 +37,13 @@ object PermissionsUtil {
         // Verify that all required permissions have been granted
         activity?.let {
             for (permission in permissions) {
-                if (ActivityCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(activity, permission) !=
+                    PackageManager.PERMISSION_GRANTED
+                ) {
                     return false
                 }
             }
         }
-
         return true
     }
-
 }

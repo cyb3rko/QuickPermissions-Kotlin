@@ -1,17 +1,17 @@
 package com.livinglifetechway.quickpermissions_kotlin.util
 
 data class QuickPermissionsRequest(
-        private var target: PermissionCheckerFragment,
-        var permissions: Array<String> = emptyArray(),
-        var handleRationale: Boolean = true,
-        var rationaleMessage: String = "",
-        var handlePermanentlyDenied: Boolean = true,
-        var permanentlyDeniedMessage: String = "",
-        internal var rationaleMethod: ((QuickPermissionsRequest) -> Unit)? = null,
-        internal var permanentDeniedMethod: ((QuickPermissionsRequest) -> Unit)? = null,
-        internal var permissionsDeniedMethod: ((QuickPermissionsRequest) -> Unit)? = null,
-        var deniedPermissions: Array<String> = emptyArray(),
-        var permanentlyDeniedPermissions: Array<String> = emptyArray()
+    private var target: PermissionCheckerFragment,
+    var permissions: Array<String> = emptyArray(),
+    var handleRationale: Boolean = true,
+    var rationaleMessage: String = "",
+    var handlePermanentlyDenied: Boolean = true,
+    var permanentlyDeniedMessage: String = "",
+    internal var rationaleMethod: ((QuickPermissionsRequest) -> Unit)? = null,
+    internal var permanentDeniedMethod: ((QuickPermissionsRequest) -> Unit)? = null,
+    internal var permissionsDeniedMethod: ((QuickPermissionsRequest) -> Unit)? = null,
+    var deniedPermissions: Array<String> = emptyArray(),
+    var permanentlyDeniedPermissions: Array<String> = emptyArray()
 ) {
     /**
      * Proceed with requesting permissions again with user request

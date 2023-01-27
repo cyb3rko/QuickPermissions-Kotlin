@@ -1,6 +1,5 @@
 package com.livinglifetechway.quickpermissions_kotlin.util
 
-
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri.fromParts
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment
  * This fragment holds the single permission request and holds it until the flow is completed
  */
 class PermissionCheckerFragment : Fragment() {
-
     private var quickPermissionsRequest: QuickPermissionsRequest? = null
 
     interface QuickPermissionsCallback {
@@ -60,29 +58,44 @@ class PermissionCheckerFragment : Fragment() {
         if (quickPermissionsRequest != null) {
             // permission request flow is finishing
             // let the caller receive callback about it
-            if (quickPermissionsRequest?.deniedPermissions?.size ?: 0 > 0)
+            if ((quickPermissionsRequest?.deniedPermissions?.size ?: 0) > 0) {
                 mListener?.onPermissionsDenied(quickPermissionsRequest)
+            }
 
             removeRequestPermissionsRequest()
             removeListener()
         } else {
-            Log.w(TAG, "clean: QuickPermissionsRequest has already completed its flow. " +
-                    "No further callbacks will be called for the current flow.")
+            Log.w(
+                TAG,
+                "clean: QuickPermissionsRequest has already completed its flow. No further " +
+                    "callbacks will be called for the current flow."
+            )
         }
     }
 
     fun requestPermissionsFromUser() {
         if (quickPermissionsRequest != null) {
             Log.d(TAG, "requestPermissionsFromUser: requesting permissions")
-            requestPermissions(quickPermissionsRequest?.permissions.orEmpty(), PERMISSIONS_REQUEST_CODE)
+            requestPermissions(
+                quickPermissionsRequest?.permissions.orEmpty(),
+                PERMISSIONS_REQUEST_CODE
+            )
         } else {
-            Log.w(TAG, "requestPermissionsFromUser: QuickPermissionsRequest has already completed its flow. " +
-                    "Cannot request permissions again from the request received from the callback. " +
-                    "You can start the new flow by calling runWithPermissions() { } again.")
+            Log.w(
+                TAG,
+                "requestPermissionsFromUser: QuickPermissionsRequest has already completed its " +
+                    "flow. Cannot request permissions again from the request received from the " +
+                    "callback. You can start the new flow by calling runWithPermissions() { } " +
+                    "again."
+            )
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.d(TAG, "passing callback")
 
@@ -91,8 +104,8 @@ class PermissionCheckerFragment : Fragment() {
     }
 
     /**
-     * Checks and takes the action based on permission results retrieved from onRequestPermissionsResult
-     * and from the settings activity
+     * Checks and takes the action based on permission results retrieved from
+     * onRequestPermissionsResult and from the settings activity
      *
      * @param permissions List of Permissions
      * @param grantResults A list of permission result <b>Granted</b> or <b>Denied</b>
@@ -104,12 +117,15 @@ class PermissionCheckerFragment : Fragment() {
         // this can happen in case when the multiple permissions requests are sent
         // simultaneously to the system
         if (permissions.isEmpty()) {
-            Log.w(TAG, "handlePermissionResult: Permissions result discarded. You might have called multiple permissions request simultaneously")
+            Log.w(
+                TAG,
+                "handlePermissionResult: Permissions result discarded. You might have called " +
+                    "multiple permissions request simultaneously"
+            )
             return
         }
 
         if (PermissionsUtil.hasSelfPermission(context, permissions)) {
-
             // set the denied permissions to empty as all the permissions are granted
             // this is required as clean will be called which can invoke on permissions denied
             // if it finds some permissions in the denied list
@@ -128,9 +144,8 @@ class PermissionCheckerFragment : Fragment() {
             // check if rationale dialog should be shown or not
             var shouldShowRationale = true
             var isPermanentlyDenied = false
-            for (i in 0 until deniedPermissions.size) {
-                val deniedPermission = deniedPermissions[i]
-                val rationale = shouldShowRequestPermissionRationale(deniedPermission)
+            for (element in deniedPermissions) {
+                val rationale = shouldShowRequestPermissionRationale(element)
                 if (!rationale) {
                     shouldShowRationale = false
                     isPermanentlyDenied = true
@@ -139,11 +154,14 @@ class PermissionCheckerFragment : Fragment() {
             }
 
             if (quickPermissionsRequest?.handlePermanentlyDenied == true && isPermanentlyDenied) {
-
                 quickPermissionsRequest?.permanentDeniedMethod?.let {
                     // get list of permanently denied methods
                     quickPermissionsRequest?.permanentlyDeniedPermissions =
-                            PermissionsUtil.getPermanentlyDeniedPermissions(this, permissions, grantResults)
+                        PermissionsUtil.getPermanentlyDeniedPermissions(
+                            this,
+                            permissions,
+                            grantResults
+                        )
                     mListener?.onPermissionsPermanentlyDenied(quickPermissionsRequest)
                     return
                 }
@@ -160,7 +178,6 @@ class PermissionCheckerFragment : Fragment() {
 
             // if should show rationale dialog
             if (quickPermissionsRequest?.handleRationale == true && shouldShowRationale) {
-
                 quickPermissionsRequest?.rationaleMethod?.let {
                     mListener?.shouldShowRequestPermissionsRationale(quickPermissionsRequest)
                     return
@@ -184,12 +201,17 @@ class PermissionCheckerFragment : Fragment() {
 
     fun openAppSettings() {
         if (quickPermissionsRequest != null) {
-            val intent = Intent(ACTION_APPLICATION_DETAILS_SETTINGS,
-                    fromParts("package", activity?.packageName, null))
-            //                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            val intent = Intent(
+                ACTION_APPLICATION_DETAILS_SETTINGS,
+                fromParts("package", activity?.packageName, null)
+            )
             startActivityForResult(intent, PERMISSIONS_REQUEST_CODE)
         } else {
-            Log.w(TAG, "openAppSettings: QuickPermissionsRequest has already completed its flow. Cannot open app settings")
+            Log.w(
+                TAG,
+                "openAppSettings: QuickPermissionsRequest has already completed its flow. Cannot " +
+                    "open app settings"
+            )
         }
     }
 
@@ -220,7 +242,9 @@ class PermissionCheckerFragment : Fragment() {
             val permissions = quickPermissionsRequest?.permissions ?: emptyArray()
             val grantResults = IntArray(permissions.size)
             permissions.forEachIndexed { index, s ->
-                grantResults[index] = context?.let { ActivityCompat.checkSelfPermission(it, s) } ?: PackageManager.PERMISSION_DENIED
+                grantResults[index] = context?.let {
+                    ActivityCompat.checkSelfPermission(it, s)
+                } ?: PackageManager.PERMISSION_DENIED
             }
 
             handlePermissionResult(permissions, grantResults)
