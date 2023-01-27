@@ -4,26 +4,22 @@ plugins {
 }
 
 android {
-    compileSdkVersion 27
-
+    compileSdk 33
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdk 33
         versionCode 1
         versionName "1.0"
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'org.jetbrains.anko:anko-commons:0.10.5'
 }

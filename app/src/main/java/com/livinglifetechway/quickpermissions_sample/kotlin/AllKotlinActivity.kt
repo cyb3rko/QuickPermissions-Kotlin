@@ -2,11 +2,11 @@ package com.livinglifetechway.quickpermissions_sample.kotlin
 
 import android.Manifest
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.livinglifetechway.k4kotlin.onClick
 import com.livinglifetechway.k4kotlin.setBindingView
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
