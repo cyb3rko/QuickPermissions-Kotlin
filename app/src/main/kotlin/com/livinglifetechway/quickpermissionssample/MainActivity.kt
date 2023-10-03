@@ -10,7 +10,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         mBinding.buttonKotlinAll.setOnClickListener {
             startActivity(Intent(this, AllKotlinActivity::class.java))

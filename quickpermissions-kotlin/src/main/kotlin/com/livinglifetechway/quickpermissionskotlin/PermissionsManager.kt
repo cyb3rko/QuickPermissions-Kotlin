@@ -40,8 +40,6 @@ private fun runWithPermissionsHandler(
     callback: () -> Unit,
     options: QuickPermissionsOptions
 ): Nothing? {
-    Log.d(TAG, "runWithPermissions: start")
-
     // get the permissions defined in annotation
     Log.d(TAG, "runWithPermissions: permissions to check: $permissions")
 

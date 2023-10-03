@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".AllKotlinActivity">
+    tools:context=".AllKotlinActivity"
+    tools:ignore="HardcodedText">
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/handleRationale"
