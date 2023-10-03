@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.livinglifetechway.k4kotlin.onClick
 import com.livinglifetechway.quickpermissionskotlin.runWithPermissions
 import com.livinglifetechway.quickpermissionskotlin.util.QuickPermissionsRequest
 import com.livinglifetechway.quickpermissionskotlin.util.QuickPermissionsOptions
@@ -39,7 +38,7 @@ class AllKotlinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityAllKotlinBinding.inflate(layoutInflater)
 
-        mBinding.button.onClick {
+        mBinding.button.setOnClickListener {
             // create the quickpermissions object
             val options = QuickPermissionsOptions()
             options.handleRationale = mBinding.handleRationale.isChecked

@@ -1,10 +1,9 @@
 package com.livinglifetechway.quickpermissionssample
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.livinglifetechway.quickpermissionssample.databinding.ActivityMainBinding
-import org.jetbrains.anko.startActivity
-import com.livinglifetechway.quickpermissionssample.AllKotlinActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -14,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         mBinding.buttonKotlinAll.setOnClickListener {
-            startActivity<AllKotlinActivity>()
+            startActivity(Intent(this, AllKotlinActivity::class.java))
         }
         setContentView(mBinding.root)
     }
