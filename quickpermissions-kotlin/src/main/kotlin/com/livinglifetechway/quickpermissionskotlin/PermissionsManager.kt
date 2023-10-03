@@ -68,6 +68,9 @@ private fun runWithPermissionsHandler(
 
             Log.d(TAG, "runWithPermissions: doesn't have required permissions")
 
+            // execute preRationaleAction
+            options.preRationaleAction?.let { it() }
+
             // check if we have permission checker fragment already attached
 
             // support for AppCompatActivity and Activity

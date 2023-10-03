@@ -27,6 +27,7 @@ class AllKotlinActivity : AppCompatActivity() {
     private val quickPermissionsOption = QuickPermissionsOptions(
             rationaleMessage = "Custom rational message",
             permanentlyDeniedMessage = "Custom permanently denied message",
+            preRationaleAction = { preRationaleMethod() },
             rationaleMethod = { rationaleCallback(it) },
             permanentDeniedMethod = { permissionsPermanentlyDenied(it) },
             permissionsDeniedMethod = { whenPermAreDenied(it) }
@@ -51,6 +52,9 @@ class AllKotlinActivity : AppCompatActivity() {
             options.handlePermanentlyDenied = mBinding.handlePermanentlyDenied.isChecked
             if (mBinding.customPermanentlyDeniedMessage.isChecked) {
                 options.permanentlyDeniedMessage = "Custom permanently denied message"
+            }
+            if (mBinding.preRationaleAction.isChecked) {
+                options.preRationaleAction = { preRationaleMethod() }
             }
             if (mBinding.customPermanentlyDeniedMethod.isChecked) {
                 options.permanentDeniedMethod = { permissionsPermanentlyDenied(it) }
@@ -110,4 +114,7 @@ class AllKotlinActivity : AppCompatActivity() {
 //        toast.show()
     }
 
+    private fun preRationaleMethod() {
+        Toast.makeText(this, "Requesting permissions", Toast.LENGTH_SHORT).show()
+    }
 }
