@@ -23,25 +23,22 @@ To make it with that, google has created it's own library [easypermissions](http
 
 So, to solve this issue [QuickPermissions](https://github.com/QuickPermissions/QuickPermissions) was created. But, it turns out that, it doesn't work with instant-run and lots of developers can not afford to disable instant run, because it dramatically increased the build time. So, if you are working with Kotlin, you are lucky. This library is created to solve that problem in Kotlin. No gradle plugin and no long running build times. Asking for permissions synchronous way (*It looks like that, but won't block the main thread, don't worry, no ANRs, promise!*). And after the permissions are granted, it will continue executing the method block which was on hold. As simple as that.
 
-
-
 ## Add it to your app
 
 In your, **project**'s `build.gradle` file:
 
 ```groovy
-allprojects {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        jcenter()
-        maven { url "http://jitpack.io/" }  // <-- THIS MUST BE ADDED
+        mavenCentral()
+        maven { url "https://jitpack.io/" }  // <-- THIS MUST BE ADDED
     }
 }
 ```
 
 As this library is using jitpack to publish this, you need to add jitpack url. If you already have, do not add that again.
-
-
 
 In your **app**'s `build.gradle` file, add the following dependency: 
 
@@ -51,29 +48,15 @@ dependencies {
 }
 ```
 
+## How to use it?
 
+The following call has to be made in an `Activity` or `Fragment` context: 
 
-Now, read below for using directions.
-
-
-
-## How to do it?
-
-
-
-Add this to your `Activity` extending `AppCompatActivity` or `Fragment` from the **support library.** 
-
-
-
-### Let the library do all the hard stuff
-
-Use `runWithPermissions` block, and you are all done. Library will manage everything, will ask for permissions, will show rationale dialog if denied and also ask to user to allow permissions from settings if user has permanently denied some permission(s) required by the method. You 
-
-
+Use `runWithPermissions` block, and you are all done. Library will manage everything, will ask for permissions, will show rationale dialog if denied and also ask to user to allow permissions from settings if user has permanently denied some permission(s) required by the method.
 
 ```kotlin
 fun methodWithPermissions() = runWithPermissions(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
-    Toast.makeText(this, "Camera and audio recording permissions granted", Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, "Camera and audio recording permissions granted", Toast.LENGTH_SHORT).show()
     // Do the stuff with permissions safely
 }
 ```
@@ -82,33 +65,29 @@ That's it! You are good to go.
 
 Your inner code will not be executed until the permission mentioned will not be granted. If it already has the permissions, it will simply be executed right away. If not, it will ask for permissions and executes it after it was granted.
 
-
-
-**NOTE:** The one thing is to make sure, your function should not return anything (return type should be Unit), as the asking permissions is asynchronous behavior, that can not be handled in a true synchronous way.
-
-
+**NOTE:** The one thing is to make sure, your function should not return anything (return type should be Unit), as the asking permissions is asynchronous behavior, that can not be handled in a true synchronous way.-
 
 ### Advanced
 
-You can optionally pass on the `options` object to that method, which can do some handful of things.
+You can optionally pass on the `options` object to that method:
 
 Things you can do with it:
 
-* `handleRationale` : true/false value indicating whether the library should handle rational dialog or not.
-* `rationaleMessage` : Custom rational message which will override default value if specified.
-* `handlePermanentlyDenied` : true/false value indicating whether the library should handle permissions permanently denied dialog or not.
-* `permanentlyDeniedMessage` : Custom permanently denied message which will override default value if specified.
-* `rationaleMethod` : Handle rational callback yourself. This will pass on the callback to this function if specified. This will provide you will `QuickPermissionsRequest` instance on which you can call, `proceed()` to continue asking permissions again, or call `cancel()` to cancel the flow.
-* `permanentDeniedMethod` : Handle permissions permanently denied callback yourself. This will pass on the callback to this function if specified. This will provide you will `QuickPermissionsRequest` instance on which you can call `openAppSettings()` on it to continue flow or `cancel()` to cancel the flow.
-* `permissionsDeniedMethod` : Callback method to handle cases when some/all permissions are denied at the end of asking permissions flow.  This will provide you will `QuickPermissionsRequest` instance from which you can retrieve the permissions which were denied.
-
-
+* `handleRationale` : Boolean indicating whether the library should handle rationale dialog or not
+* `rationaleMessage` : Custom rational message overriding default value if specified
+* `handlePermanentlyDenied` : Boolean indicating whether the library should handle permissions permanently denied dialog or not
+* `permanentlyDeniedMessage` : Custom permanently denied message overriding default value if specified
+* `preRationaleAction` : Function to be called when permissions are missing and before starting flow
+* `rationaleMethod` : Function to handle rational callback yourself. It will prvoide a `QuickPermissionsRequest` instance on which you can call `proceed()` to continue asking permissions again, or call `cancel()` to cancel the flow
+* `permanentDeniedMethod` : Function to handle permissions permanently denied callback yourself. It will prvoide a `QuickPermissionsRequest` instance on which you can call `openAppSettings()` to continue or `cancel()` to cancel the flow
+* `permissionsDeniedMethod` : Function to handle cases when some/all permissions are denied at the end of the flow. It will prvoide a `QuickPermissionsRequest` instance from which you can retrieve the permissions which were denied.
 
 ```kotlin
 val quickPermissionsOption = QuickPermissionsOptions(
-	handleRationale = false
+    handleRationale = false
     rationaleMessage = "Custom rational message",
     permanentlyDeniedMessage = "Custom permanently denied message",
+    preRationaleAction = { showToast() },
     rationaleMethod = { req -> rationaleCallback(req) },
     permanentDeniedMethod = { req -> permissionsPermanentlyDenied(req) }
 )
@@ -118,20 +97,10 @@ private fun methodRequiresPermissions() = runWithPermissions(Manifest.permission
 }
 ```
 
-
-
-## Summary 
-
-It's super simple and super easy. Just wrap your code with `runWithPermissions` block and you are good to go by avoiding all the complexity android runtime permissions introduces.
-
-
-
 ## Sample
 
-There is an sample `app` available in this repo. Just clone it and run `app` to check it out. Play with it and share your feedback.
-
-
+There is an sample `app` available in this repo. Just clone it and run `app` to check it out.
 
 ----
 
-Have any questions, or any trouble? Create an issue.
+Have any questions or any trouble? Create an issue.
