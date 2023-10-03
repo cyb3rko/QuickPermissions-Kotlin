@@ -1,5 +1,6 @@
 package com.livinglifetechway.quickpermissionskotlin.util
 
+@Suppress("ArrayInDataClass")
 data class QuickPermissionsRequest(
     private var target: PermissionCheckerFragment,
     var permissions: Array<String> = emptyArray(),
