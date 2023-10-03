@@ -69,5 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="24dp"
-        android:text="Start Permissions Flow" />
+        android:text="Start Permissions Flow"
+        android:textColor="#FFFFFF" />
+
 </LinearLayout>
