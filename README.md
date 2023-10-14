@@ -25,7 +25,7 @@ So, to solve this issue [QuickPermissions](https://github.com/QuickPermissions/Q
 
 ## Add it to your app
 
-In your, **project**'s `build.gradle` file:
+In your `settings.gradle` file (or wherever you've set up repositories):
 
 ```groovy
 dependencyResolutionManagement {
