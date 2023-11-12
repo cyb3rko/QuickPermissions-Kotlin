@@ -41,7 +41,7 @@ private fun runWithPermissionsHandler(
     options: QuickPermissionsOptions
 ): Nothing? {
     // get the permissions defined in annotation
-    Log.d(TAG, "runWithPermissions: permissions to check: $permissions")
+    Log.d(TAG, "runWithPermissions: permissions to check: ${permissions.joinToString()}")
 
     // get target
     if (target is AppCompatActivity || target is Fragment) {
