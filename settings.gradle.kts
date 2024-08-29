@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -10,8 +12,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io/" }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 rootProject.name = "Quick-Permissions-Kotlin"
-include ':app', ':quickpermissions-kotlin'
+include(":app")
+include("::quickpermissions-kotlin")
