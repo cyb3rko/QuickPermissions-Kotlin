@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.livinglifetechway.quickpermissions_kotlin"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
-        minSdk = 16
-        targetSdk = 34
+        minSdk = 21
+        targetSdk = 35
         resourceConfigurations.add("en")
     }
     buildTypes {

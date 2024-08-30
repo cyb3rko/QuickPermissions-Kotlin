@@ -1,10 +1,10 @@
 [versions]
-agp = "8.1.2"
-kotlin = "1.7.21"
-appcompat = "1.6.1"
+agp = "8.6.0"
+kotlin = "2.0.0"
+appcompat = "1.7.0"
 constraintlayout = "2.1.4"
-material = "1.9.0"
-kotlinter = "3.15.0"
+material = "1.12.0"
+kotlinter = "4.2.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }

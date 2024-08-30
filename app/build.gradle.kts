@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.livinglifetechway.quickpermissionssample"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.livinglifetechway.quickpermissionssample"
-        minSdk = 16
-        targetSdk = 34
+        minSdk = 21
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         resourceConfigurations.add("en")
